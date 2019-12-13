@@ -1,0 +1,36 @@
+---
+
+- name: Provision the EC2 instance
+  remote_user: ec2-user
+  hosts: jenkins-ci
+
+  tasks:
+    - name: Install Docker on EC2 instance
+      yum:
+        name: docker
+        state: latest
+      become: yes
+      become_method: sudo
+
+    - name: Add user ec2-user to Docker group
+      command: 'usermod -aG docker ec2-user'
+      become: yes
+      become_method: sudo
+
+    - name: Enable and Start the Docker service daemon
+      systemd:
+        state: started
+        enabled: yes
+        name: docker
+      become: yes
+      become_method: sudo
+
+    - name: Resets SSH connection
+      meta: reset_connection
+
+    - name: Install mulatinho/jenkins-ci docker container
+      command: 'docker pull mulatinho/jenkins-ci:latest'
+
+    - name: Run docker container image 
+      command: 'docker run -d -p 80:8080 mulatinho/jenkins-ci'
+
