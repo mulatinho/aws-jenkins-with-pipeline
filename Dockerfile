@@ -6,21 +6,18 @@ RUN apt-get update -y
 
 RUN apt-get install maven -y
 
+USER jenkins
+
 WORKDIR /opt/petclinic
 
 COPY Jenkinsfile /opt/petclinic
 
-# installing plugins
 COPY plugins.txt /opt/petclinic
 
 RUN while read PLUGIN; do \
 	/usr/local/bin/install-plugins.sh $PLUGIN; done < plugins.txt
 
-
-# creating first pipeline job
-RUN mkdir -p /var/jenkins_home/jobs
-
-COPY config.xml /var/jenkins_home/jobs/petclinic-job/
+COPY petclinic-job.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 

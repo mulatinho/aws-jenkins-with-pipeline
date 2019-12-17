@@ -1,3 +1,6 @@
+git
+job-dsl
 workflow-aggregator
 workflow-cps
-git
+workflow-job
+pipeline-model-definition
