@@ -1,5 +1,5 @@
-# jenkins-ci-pipeline-example
-this is an example of jenkins-ci pipeline using a default job initialized on startup of jenkins.
+# gcloud-jenkins-with-pipeline
+in this is we run a Kubernetes cluster using AWS and using a jenkins-ci with a pipeline that is triggered at the startup.
 
 ## how to build
 
