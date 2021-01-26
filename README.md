@@ -1,4 +1,4 @@
-# gcloud-jenkins-with-pipeline
+# aws-jenkins-with-pipeline
 in this is we run a Kubernetes cluster using AWS and using a jenkins-ci with a pipeline that is triggered at the startup.
 
 ## how to build
